@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="DiskAnalyzer" default="jar" basedir=".">
+    <property name="src.dir"    value="src"/>
+    <property name="bin.dir"    value="bin"/>
+    <property name="dist.dir"   value="dist"/>
+    <property name="jar.name"   value="DiskAnalyzer.jar"/>
+    <property name="main.class" value="de.diskanalyzer.Main"/>
+
+    <target name="clean">
+        <delete dir="${bin.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${bin.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${bin.dir}"
+               includeantruntime="false" encoding="UTF-8"
+               source="11" target="11"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/${jar.name}" basedir="${bin.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+        <echo message="JAR erstellt: dist/${jar.name}"/>
+    </target>
+</project>
